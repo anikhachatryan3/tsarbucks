@@ -32,8 +32,9 @@
     </head>
     <body>
         <div class="topnav row" style="background-color: #292b2c;">
-            <a class="active col-1 h3" style="color: white; margin-left: 15px; margin-bottom: 20px;">Tsarbucks</a>
-            <a class="col-4 h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Home</a>
+            <a class="active h3 col-1" style="color: white; margin-left: 15px; margin-bottom: 20px; padding-left: 20px;">Tsarbucks</a>
+            <a href="menu.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Home</a>
+            <a href="orders.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Orders</a>
             <a class="col-2 h4" style="color: #949595; padding-top: 16px; padding-left: 90px;">
                 <?php
                     echo "Hello, " . $_SESSION["name"];
@@ -43,7 +44,7 @@
             <a href="logout.php" class="col-1 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 1px;">Logout</a>
         </div>
         
-        <h1 style="padding-bottom: 10px;"> Menu </h1>
+        <h1 style="padding-bottom: 10px; padding-left: 16px;"> Menu </h1>
         <div class="container-fluid">
             <div class="row border">
                 <h3 class="col-5">Product Name</h3>
