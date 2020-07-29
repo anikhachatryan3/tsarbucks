@@ -20,11 +20,23 @@
             $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
             if($stmt->execute([$_POST["uname"]])) {
                 $result = $stmt->fetchAll();
-                // var_dump($result);
                 if(count($result) && ($_POST["upass"] == $result[0]["password"])) {
                     $_SESSION["name"] = $result[0]["display_name"];
                     $_SESSION["username"] = $result[0]["username"];
                     $_SESSION["userid"] = $result[0]["user_id"];
+                    $_SESSION["cart"] = array();
+                    $_SESSION["cartSize"] = 0;
+                    $_SESSION["cartTotal"] = 0;
+
+                    $products = $db->prepare("SELECT * FROM products WHERE product_id");
+                    if($products->execute()) {
+                        $items = $products->fetchAll();
+                        $_SESSION["cartSize"] = count($items);
+                        for($i = 0; $i < count($items); $i++) {
+                            $_SESSION["cart"][$i] = 0;
+                        }
+                    }
+
                     header("Location: http://localhost:8888/menu.php");
                 }
                 else {

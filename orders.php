@@ -1,6 +1,5 @@
 <?php
     session_start();
-    // var_dump($_SESSION["userid"]);
     
     $conn = "mysql:host=127.0.0.1;port=8889;dbname=tsarbucks";
 
@@ -16,12 +15,10 @@
     $stmt = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
     if($stmt->execute([$_SESSION["userid"]])) {
         $result = $stmt->fetchAll();
-        // var_dump($result);
     }
     else {
         var_dump("Unable to execute");
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +42,7 @@
                     echo "Hello, " . $_SESSION["name"];
                 ?>
             </a>
-            <a class="col-2 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 130px;">My Cart</a>
+            <a href="cart.php" class="col-2 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 130px;">My Cart</a>
             <a href="logout.php" class="col-1 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 1px;">Logout</a>
         </div>
         <h1 style="padding-left: 10px;">My Orders</h1>
@@ -119,19 +116,18 @@
                     }
                     ?>
                     <div class="text-right" style="font-size: 18px; font-weight: 500; padding-top: 10px;">
-                    <?php
-                        echo "Total Price: $" . number_format((float)$totalPrice, 2, '.', '');
-                    ?>
+                        <?php
+                            echo "Total Price: $" . number_format((float)$totalPrice, 2, '.', '');
+                        ?>
                     </div>
                     <div class="text-right" style="font-size: 18px; font-weight: 500;">
-                    <?php
-                        echo "Total Size: " . $totalSize . " oz";
-                    ?>
+                        <?php
+                            echo "Total Size: " . $totalSize . " oz";
+                        ?>
                     </div>
                     <?php
                 }
             ?>
-            <!-- </div> -->
         </div>
     </body>
 </html>

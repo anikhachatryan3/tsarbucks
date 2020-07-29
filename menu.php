@@ -15,7 +15,6 @@
     $stmt = $db->prepare("SELECT * FROM products");
     if($stmt->execute()) {
         $result = $stmt->fetchAll();
-        // var_dump($result);
     }
 ?>
 
@@ -40,7 +39,7 @@
                     echo "Hello, " . $_SESSION["name"];
                 ?>
             </a>
-            <a class="col-2 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 130px;">My Cart</a>
+            <a href="cart.php" class="col-2 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 130px;">My Cart</a>
             <a href="logout.php" class="col-1 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 1px;">Logout</a>
         </div>
         
@@ -71,7 +70,10 @@
                         echo $result[$i]['size'];
                     ?>
                 </div>
-                <div class="col-1 btn btn-primary" role="button" style="font-size: 15px">Add to Cart</div>
+                <form method="POST" action="add.php">
+                    <input type="hidden" name="id" value="<?php echo $result[$i]["product_id"]; ?>">
+                    <input type="submit" name="submit" value="Add to Cart" class="btn btn-primary">
+                </form>
             </div>
             <?php
                 }
