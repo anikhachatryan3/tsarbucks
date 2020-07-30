@@ -2,8 +2,12 @@
     session_start();
     
     $id = $_POST["id"];
-    $_SESSION["cart"][$id]--;
-    $_SESSION["cartTotal"]--;
+    if($_SESSION["cart"][$id] > 0) {
+        $_SESSION["cart"][$id]--;
+    }
+    if($_SESSION["cartTotal"] > 0) {
+        $_SESSION["cartTotal"]--;
+    }
 ?>
 
 <!DOCTYPE html>

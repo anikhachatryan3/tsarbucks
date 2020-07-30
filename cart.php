@@ -50,7 +50,6 @@
             $totalPrice = 0;
             $totalSize = 0;
             foreach ($_SESSION["cart"] as $index => $value) {
-            // for($i = 0; $i < $_SESSION["cartSize"]; $i++) {
                 if($value > 0) {
                     $stmt = $db->prepare("SELECT * FROM products WHERE product_id = ?");
                     if($stmt->execute([$index])) {
@@ -101,9 +100,8 @@
                         echo "Total Size: " . $totalSize . " ounces";
                     ?>
             </div>
-            <form>
-                <input type="hidden" name="id" value="<?php echo $result[$i]["product_id"]; ?>">
-                <input class="btn btn-primary" type="submit" value="Submit Order">
+            <form method="POST" action="submitOrder.php">
+                <input class="btn btn-primary" type="submit" name="submit" value="Submit Order">
             </form>
         </div>
     </body>
