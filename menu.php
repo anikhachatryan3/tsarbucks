@@ -30,18 +30,9 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     </head>
     <body>
-        <div class="topnav row" style="background-color: #292b2c;">
-            <a class="active h3 col-1" style="color: white; margin-left: 15px; margin-bottom: 20px; padding-left: 20px;">Tsarbucks</a>
-            <a href="menu.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Home</a>
-            <a href="orders.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Orders</a>
-            <a class="col-2 h4" style="color: #949595; padding-top: 16px; padding-left: 90px;">
-                <?php
-                    echo "Hello, " . $_SESSION["name"];
-                ?>
-            </a>
-            <a href="cart.php" class="col-2 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 130px;">My Cart</a>
-            <a href="logout.php" class="col-1 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 1px;">Logout</a>
-        </div>
+        <?php
+            include "nav.php";
+        ?>
         
         <h1 style="padding-bottom: 10px; padding-left: 16px;"> Menu </h1>
         <div class="container-fluid">

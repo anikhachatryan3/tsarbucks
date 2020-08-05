@@ -36,6 +36,11 @@
                             $_SESSION["cart"][$i] = 0;
                         }
                     }
+                    $stmt = $db->prepare("SELECT * FROM user_roles WHERE user_id = ?");
+                    if($stmt->execute([$_SESSION["userid"]])) {
+                        $result = $stmt->fetchAll();
+                        $_SESSION["role"] = $result[0]["role"];
+                    }
 
                     header("Location: http://localhost:8888/menu.php");
                 }

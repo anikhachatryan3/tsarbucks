@@ -11,7 +11,6 @@
     catch(PDOException $e) {
         die("Could not connect: " . $e->getMessage());
     }
-    // var_dump($_SESSION["cart"]);
 ?>
 
 <!DOCTYPE html>
@@ -26,20 +25,19 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     </head>
     <body>
-        <div class="topnav row" style="background-color: #292b2c;">
-            <a class="active col-1 h3" style="color: white; margin-left: 15px; margin-bottom: 20px; padding-left: 20px;">Tsarbucks</a>
-            <a href="menu.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Home</a>
-            <a href="orders.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Orders</a>
-            <a class="col-2 h4" style="color: #949595; padding-top: 16px; padding-left: 90px;">
-                <?php
-                    echo "Hello, " . $_SESSION["name"];
-                ?>
-            </a>
-            <a class="col-2 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 130px;">My Cart</a>
-            <a href="logout.php" class="col-1 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 1px;">Logout</a>
-        </div>
+        <?php
+            include "nav.php";
+        ?>
         <h1 style="padding-left: 10px;">My Cart</h1>
         <div class="container-fluid">
+        <div style="font-size: 18px; padding: 10px;">
+        <?php
+            if($_SESSION["cartTotal"] == 0) {
+                echo "Cart is empty; please add items to your cart.";
+            }
+            else {
+        ?>
+        </div>
             <div class="row border h3">
                 <div class="col-5">Product Name</div>
                 <div class="col-2" style="padding-right: 100px;">Price</div>
@@ -103,6 +101,9 @@
             <form method="POST" action="submitOrder.php">
                 <input class="btn btn-primary" type="submit" name="submit" value="Submit Order">
             </form>
+        <?php
+            }
+        ?>
         </div>
     </body>
 </html>

@@ -12,7 +12,7 @@
         die("Could not connect: " . $e->getMessage());
     }
 
-    $stmt = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
+    $stmt = $db->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY order_id DESC");
     if($stmt->execute([$_SESSION["userid"]])) {
         $result = $stmt->fetchAll();
     }
@@ -33,23 +33,14 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     </head>
     <body>
-        <div class="topnav row" style="background-color: #292b2c;">
-            <a class="active col-1 h3" style="color: white; margin-left: 15px; margin-bottom: 20px; padding-left: 20px;">Tsarbucks</a>
-            <a href="menu.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Home</a>
-            <a href="orders.php" class="h4" style="color: #949595; padding-top: 16px; padding-left: 40px;">Orders</a>
-            <a class="col-2 h4" style="color: #949595; padding-top: 16px; padding-left: 90px;">
-                <?php
-                    echo "Hello, " . $_SESSION["name"];
-                ?>
-            </a>
-            <a href="cart.php" class="col-2 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 130px;">My Cart</a>
-            <a href="logout.php" class="col-1 h4" style="text-align: right; color: #949595; padding-top: 16px; padding-left: 1px;">Logout</a>
-        </div>
+        <?php
+            include "nav.php";
+        ?>
         <h1 style="padding-left: 10px;">My Orders</h1>
         <div class="container-fluid">
             <?php
-                $numOrders = $result[count($result)-1]["order_id"];
-                for($order = 1; $order <= $numOrders; $order++) {
+                $numOrders = $result[0]["order_id"];
+                for($order = $numOrders; $order >= 1; $order--) {
                     $totalPrice = 0;
                     $totalSize = 0;
             ?>

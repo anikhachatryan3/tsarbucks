@@ -17,11 +17,9 @@
         // echo "HERE";
         $stmt = $db->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY order_id DESC");
         $orderID = 0;
-        if($stmt->execute()) {
+        if($stmt->execute([$_SESSION["userid"]])) {
             $result = $stmt->fetchAll();
-            if(count($result) == 1) {
-                $orderID = $result[0]["order_id"] + 1;
-            }
+            $orderID = $result[0]["order_id"] + 1;
         }
         $stmt = $db->prepare("INSERT INTO orders (order_id, user_id, product_id, quantity, completed) VALUES (?, ?, ?, ?, ?)");
 
@@ -29,13 +27,12 @@
         foreach ($_SESSION["cart"] as $index => $value) {
             if($value > 0) {
                 echo $orderId;
-                if($stmt->execute($orderID, $_SESSION["userid"], $index, $value, 0)) {
+                if($stmt->execute([$orderID, $_SESSION["userid"], $index, $value, 0])) {
                     $_SESSION["cart"][$index] = 0;
                 }
             }
         }
         $_SESSION["cartTotal"] = 0;
-        echo "Order submitted!";
     }
     else {
         echo "Cart is empty; please add an item to cart.";
@@ -45,6 +42,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- <meta http-equiv="refresh" content="0; url=cart.php"/> -->
+        <meta http-equiv="refresh" content="0; url=orders.php"/>
     </head>
 </html>
